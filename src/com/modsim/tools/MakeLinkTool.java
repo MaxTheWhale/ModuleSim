@@ -138,8 +138,8 @@ public class MakeLinkTool extends BaseTool {
 			Vec2 tmp = new Vec2(current);
 			if (Main.ui.view.snapToGrid)
 			{
-				tmp.x = (tmp.x > 0) ? (tmp.x + 12) - ((tmp.x + 12) % 25) : (tmp.x - 12) - ((tmp.x - 12) % -25);
-				tmp.y = (tmp.y > 0) ? (tmp.y + 12) - ((tmp.y + 12) % 25) : (tmp.y - 12) - ((tmp.y - 12) % -25);
+				tmp.x = (tmp.x > 0) ? (tmp.x + 12.5f) - ((tmp.x + 12.5f) % 25) : (tmp.x - 12.5f) - ((tmp.x - 12.5f) % -25);
+				tmp.y = (tmp.y > 0) ? (tmp.y + 12.5f) - ((tmp.y + 12.5f) % 25) : (tmp.y - 12.5f) - ((tmp.y - 12.5f) % -25);
 			}
 			curve.addPt(new CtrlPt(tmp));
 			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(tmp));
