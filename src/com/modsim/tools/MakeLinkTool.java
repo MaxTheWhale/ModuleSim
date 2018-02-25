@@ -49,13 +49,18 @@ public class MakeLinkTool extends BaseTool {
 	public BaseTool mouseMove(int x, int y) {
 		if (working) {
 			current = ViewUtil.screenToWorld(new Vec2(x, y));
-
-			Port p = ViewUtil.screenSpace_portAt(x, y);
+			Vec2 tmp = new Vec2(current);
+				if (Main.ui.view.snapToGrid)
+				{
+					//tmp.x = (tmp.x - 12) - ((tmp.x - 12) % 25);
+					//tmp.y = (tmp.y - 12) - ((tmp.y - 12) % 25);
+				}
+			Port p = ViewUtil.screenSpace_portAt(tmp.x, tmp.y);
 			if (p != null) {
 				curve.setEnd(p);
 			}
-			else {
-				curve.setEnd(current);
+			else {	
+				curve.setEnd(tmp);
 			}
 		}
 
@@ -133,8 +138,8 @@ public class MakeLinkTool extends BaseTool {
 			Vec2 tmp = new Vec2(current);
 			if (Main.ui.view.snapToGrid)
 			{
-				tmp.x = (tmp.x - 12) - ((tmp.x - 12) % 25);
-				tmp.y = (tmp.y - 12) - ((tmp.y - 12) % 25);
+				tmp.x = (tmp.x > 0) ? (tmp.x + 12) - ((tmp.x + 12) % 25) : (tmp.x - 12) - ((tmp.x - 12) % -25);
+				tmp.y = (tmp.y > 0) ? (tmp.y + 12) - ((tmp.y + 12) % 25) : (tmp.y - 12) - ((tmp.y - 12) % -25);
 			}
 			curve.addPt(new CtrlPt(tmp));
 			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(tmp));
