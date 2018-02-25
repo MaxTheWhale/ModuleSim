@@ -117,6 +117,7 @@ public class MakeLinkTool extends BaseTool {
 		Port targ = ViewUtil.screenSpace_portAt(x, y);
 
 		if (targ != null) {
+			curve.addPt(new CtrlPt(targ.getDisplayPosW()));
 			Main.opStack.beginCompoundOp();
 			Link l = Link.createLink(source, targ, curve);
 			if (l != null) {
