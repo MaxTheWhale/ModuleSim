@@ -8,6 +8,7 @@ out/
 .classpath
 
 *.class
+*.sh
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

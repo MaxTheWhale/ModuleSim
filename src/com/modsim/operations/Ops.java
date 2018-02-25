@@ -135,7 +135,7 @@ public class Ops {
 
     // Core application actions
     public static final DesignAction undo, redo, copy, paste, delete, rotateCW, rotateCCW, rotate180,
-            labelEdit, labelBig, labelSmall,
+            labelEdit, labelBig, labelSmall, toggleSnap, toggleStraight,
             pause, run, step, toggleRun, zoomIn, zoomOut, resetView, toggleAA, open, save, saveAs, fileNew, quit;
 
     static {
@@ -148,6 +148,8 @@ public class Ops {
         KeyStroke ctrlO = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
         KeyStroke ctrlS = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
         KeyStroke ctrlL = KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_DOWN_MASK);
+        KeyStroke ctrlG = KeyStroke.getKeyStroke(KeyEvent.VK_G, KeyEvent.CTRL_DOWN_MASK);
+        KeyStroke ctrlH = KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK);
         KeyStroke ctrlShiftS = KeyStroke.getKeyStroke(KeyEvent.VK_S,
                 KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK);
 
@@ -277,6 +279,14 @@ public class Ops {
         },
                 "Toggle anti-aliasing", "Toggles anti-aliased rendering in the viewport: " +
                 "disabling AA may improve performance on older machines.");
+
+        toggleSnap = new DesignAction(event -> {
+            Main.ui.view.snapToGrid = !Main.ui.view.snapToGrid;
+        }, "Toggle snap-to-grid", "Toogles snapping to the grid when making links.", ctrlG);
+
+        toggleStraight = new DesignAction(event -> {
+            Main.ui.view.useStraightLines = !Main.ui.view.useStraightLines;
+        }, "Toggle straight lines", "Toggles drawing straight lines instead of curves when making links.", ctrlH);
 
         // FileIO operations
         open = new DesignAction(event -> FileIO.open(),

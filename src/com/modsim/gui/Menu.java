@@ -65,6 +65,9 @@ public class Menu {
         edit.add(new JMenuItem(Ops.rotate180));
         edit.addSeparator();
         edit.add(new JMenuItem(Ops.labelEdit));
+        edit.addSeparator();
+        edit.add(new JMenuItem(Ops.toggleSnap));
+        edit.add(new JMenuItem(Ops.toggleStraight));
 
         app_menu.add(edit);
     }

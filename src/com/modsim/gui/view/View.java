@@ -42,6 +42,8 @@ public class View extends JPanel {
     public BaseTool curTool = null;
 
     public boolean useAA = true;
+    public boolean snapToGrid = false;
+    public boolean useStraightLines = false;
 
     private int dynamicRefreshRate = 30;
 

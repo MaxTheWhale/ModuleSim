@@ -100,7 +100,7 @@ public class MakeLinkTool extends BaseTool {
 
 			curve.setEnd(source.getDisplayPosW());
 			curve.setStart(source);
-
+			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(source.getDisplayPosW()));
 			return true;
 		}
 
@@ -129,7 +129,14 @@ public class MakeLinkTool extends BaseTool {
 			return true;
 		}
 		else {
-			curve.addPt(new CtrlPt(current));
+			Vec2 tmp = new Vec2(current);
+			if (Main.ui.view.snapToGrid)
+			{
+				tmp.x = (tmp.x - 12) - ((tmp.x - 12) % 25);
+				tmp.y = (tmp.y - 12) - ((tmp.y - 12) % 25);
+			}
+			curve.addPt(new CtrlPt(tmp));
+			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(tmp));
 			return false;
 		}
 	}
