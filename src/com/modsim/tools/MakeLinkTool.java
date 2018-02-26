@@ -52,8 +52,8 @@ public class MakeLinkTool extends BaseTool {
 			Vec2 tmp = new Vec2(current);
 				if (Main.ui.view.snapToGrid)
 				{
-					//tmp.x = (tmp.x - 12) - ((tmp.x - 12) % 25);
-					//tmp.y = (tmp.y - 12) - ((tmp.y - 12) % 25);
+					tmp.x = roundToGrid(tmp.x);
+					tmp.y = roundToGrid(tmp.y);
 				}
 			Port p = ViewUtil.screenSpace_portAt(tmp.x, tmp.y);
 			if (p != null) {
@@ -138,13 +138,19 @@ public class MakeLinkTool extends BaseTool {
 			Vec2 tmp = new Vec2(current);
 			if (Main.ui.view.snapToGrid)
 			{
-				tmp.x = (tmp.x > 0) ? (tmp.x + 12.5f) - ((tmp.x + 12.5f) % 25) : (tmp.x - 12.5f) - ((tmp.x - 12.5f) % -25);
-				tmp.y = (tmp.y > 0) ? (tmp.y + 12.5f) - ((tmp.y + 12.5f) % 25) : (tmp.y - 12.5f) - ((tmp.y - 12.5f) % -25);
+				tmp.x = roundToGrid(tmp.x);
+				tmp.y = roundToGrid(tmp.y);
 			}
 			curve.addPt(new CtrlPt(tmp));
 			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(tmp));
 			return false;
 		}
+	}
+
+	private static double roundToGrid(double x) {
+		int gSize = Main.sim.grid;
+		float gSizeHalf = gSize / 2.0f;
+		return (x > 0) ? (x + gSizeHalf) - ((x + gSizeHalf) % gSize) : (x - gSizeHalf) - ((x - gSizeHalf) % -gSize);
 	}
 
 	@Override

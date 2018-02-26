@@ -282,11 +282,11 @@ public class Ops {
 
         toggleSnap = new DesignAction(event -> {
             Main.ui.view.snapToGrid = !Main.ui.view.snapToGrid;
-        }, "Toggle snap-to-grid", "Toogles snapping to the grid when making links.", ctrlG);
+        }, "Enable snap-to-grid", "Snap to the grid when making links.", ctrlG);
 
         toggleStraight = new DesignAction(event -> {
             Main.ui.view.useStraightLines = !Main.ui.view.useStraightLines;
-        }, "Toggle straight lines", "Toggles drawing straight lines instead of curves when making links.", ctrlH);
+        }, "Enable straight lines", "Draw straight lines instead of curves when making links.", ctrlH);
 
         // FileIO operations
         open = new DesignAction(event -> FileIO.open(),

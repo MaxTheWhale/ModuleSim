@@ -66,8 +66,8 @@ public class Menu {
         edit.addSeparator();
         edit.add(new JMenuItem(Ops.labelEdit));
         edit.addSeparator();
-        edit.add(new JMenuItem(Ops.toggleSnap));
-        edit.add(new JMenuItem(Ops.toggleStraight));
+        edit.add(new JCheckBoxMenuItem(Ops.toggleSnap));
+        edit.add(new JCheckBoxMenuItem(Ops.toggleStraight));
 
         app_menu.add(edit);
     }
