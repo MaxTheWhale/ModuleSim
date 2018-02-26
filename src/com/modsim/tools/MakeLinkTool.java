@@ -50,11 +50,7 @@ public class MakeLinkTool extends BaseTool {
 		if (working) {
 			current = ViewUtil.screenToWorld(new Vec2(x, y));
 			Vec2 tmp = new Vec2(current);
-				if (Main.ui.view.snapToGrid)
-				{
-					tmp.x = roundToGrid(tmp.x);
-					tmp.y = roundToGrid(tmp.y);
-				}
+			if (Main.ui.view.snapToGrid) roundToGrid(tmp);
 			Port p = ViewUtil.screenSpace_portAt(tmp.x, tmp.y);
 			if (p != null) {
 				curve.setEnd(p);
@@ -102,7 +98,7 @@ public class MakeLinkTool extends BaseTool {
 			working = true;
 			start = new Vec2(x, y);
 			curve = new BezierPath();
-
+			
 			curve.setEnd(source.getDisplayPosW());
 			curve.setStart(source);
 			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(source.getDisplayPosW()));
@@ -136,21 +132,16 @@ public class MakeLinkTool extends BaseTool {
 		}
 		else {
 			Vec2 tmp = new Vec2(current);
-			if (Main.ui.view.snapToGrid)
-			{
-				tmp.x = roundToGrid(tmp.x);
-				tmp.y = roundToGrid(tmp.y);
-			}
+			if (Main.ui.view.snapToGrid) roundToGrid(tmp);
 			curve.addPt(new CtrlPt(tmp));
 			if (Main.ui.view.useStraightLines) curve.addPt(new CtrlPt(tmp));
 			return false;
 		}
 	}
 
-	private static double roundToGrid(double x) {
-		int gSize = Main.sim.grid;
-		float gSizeHalf = gSize / 2.0f;
-		return (x > 0) ? (x + gSizeHalf) - ((x + gSizeHalf) % gSize) : (x - gSizeHalf) - ((x - gSizeHalf) % -gSize);
+	private static void roundToGrid(Vec2 c) {
+		c.x = Math.round(c.x / Main.sim.grid) * Main.sim.grid;
+		c.y = Math.round(c.y / Main.sim.grid) * Main.sim.grid;	
 	}
 
 	@Override

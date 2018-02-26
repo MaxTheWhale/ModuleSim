@@ -29,7 +29,8 @@ public class MoveTool extends BaseTool {
 	@Override
 	public BaseTool mouseDrag(int x, int y) {
 		Vec2 p = ViewUtil.screenToWorld(new Vec2(x, y));
-        p.sub(startPt);
+		p.sub(startPt);
+		if (Main.ui.view.snapToGrid) roundToGrid(p);
 
         for (PickableEntity e : entities) {
 			e.moveRelative(p);
@@ -42,6 +43,7 @@ public class MoveTool extends BaseTool {
 	public BaseTool lbUp(int x, int y) {
 		Vec2 p = ViewUtil.screenToWorld(new Vec2(x, y));
 		p.sub(startPt);
+		if (Main.ui.view.snapToGrid) roundToGrid(p);
 
 		// We're done - store the operation
 		Main.opStack.beginCompoundOp();
@@ -64,6 +66,11 @@ public class MoveTool extends BaseTool {
             e.enabled = true;
             e.moveRelative(new Vec2(0, 0));
         }
-    }
-
+	}
+	
+	private static void roundToGrid(Vec2 c) {
+		c.x = Math.round(c.x / Main.sim.grid) * Main.sim.grid;
+		c.y = Math.round(c.y / Main.sim.grid) * Main.sim.grid;	
+	}
+	
 }

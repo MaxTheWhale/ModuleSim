@@ -282,7 +282,7 @@ public class Ops {
 
         toggleSnap = new DesignAction(event -> {
             Main.ui.view.snapToGrid = !Main.ui.view.snapToGrid;
-        }, "Enable snap-to-grid", "Snap to the grid when making links.", ctrlG);
+        }, "Enable snap-to-grid", "Snap to the grid when making/moving links.", ctrlG);
 
         toggleStraight = new DesignAction(event -> {
             Main.ui.view.useStraightLines = !Main.ui.view.useStraightLines;
