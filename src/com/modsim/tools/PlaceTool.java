@@ -54,6 +54,7 @@ public class PlaceTool extends BaseTool {
 
             Vec2 delta = new Vec2(start);
             delta.sub(entities.get(0).tempPos);
+            if (Main.ui.view.snapToGrid) roundToGrid(delta);
 
             entities.get(0).tempPos.set(start);
             for (int i = 1; i < entities.size(); i++) {
@@ -63,6 +64,7 @@ public class PlaceTool extends BaseTool {
         cur.sub(start);
 
         for (PickableEntity e : entities) {
+            if (Main.ui.view.snapToGrid) roundToGrid(cur);
             e.moveRelative(cur);
         }
 
@@ -111,5 +113,10 @@ public class PlaceTool extends BaseTool {
         // Cancelling automagically undoes our changes
         Main.opStack.cancelCompoundOp();
     }
+
+    private static void roundToGrid(Vec2 c) {
+		c.x = Math.round(c.x / Main.sim.grid) * Main.sim.grid;
+		c.y = Math.round(c.y / Main.sim.grid) * Main.sim.grid;	
+	}
 
 }
